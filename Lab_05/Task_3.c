@@ -1,27 +1,31 @@
-#include <string.h>
+
 #include <stdio.h>
 #include <ctype.h> 
+#define S 100
 
 int main()
 {
-    char userInput[] = "Some text input";
-    // printf("Please enter some text: ");
-    // fgets(userInput,100,stdin);
+    //set all the array to 0
+    char userInput[S] = {0};
+    printf("Please enter some text: ");
+    //take input till there is new line, this will help to include text after space
+    scanf("%[^\n]%*c", userInput);
     int alphabet[26] = {0};
     int charInt;
-    int arrSize = sizeof(userInput)/sizeof(userInput[0]);
-    char character;
-    
-    for(int i = 0; i<arrSize -1 ; i++){
-        
-        //convert all the input to upper;
-        character = toupper(userInput[i]);
-        charInt = (int)(character) - 65;
-        if(alphabet[charInt] == 0){
-            alphabet[charInt] = 1;
-        }
-        else{
-            alphabet[charInt] = alphabet[charInt] + 1;
+    char letter;
+    for(int i = 0; i< S -1 ; i++){
+        if(((int)userInput[i] >= 65 && (int)userInput[i] <= 90) || ((int)userInput[i] >= 97 && (int)userInput[i] <= 122)){
+            //convert all the input to upper;
+            letter = toupper(userInput[i]);
+            //remove 65 from the int equivalent to reduce all to index of 0
+            charInt = (int)(letter) - 65;
+            
+            if(alphabet[charInt] == 0){
+                alphabet[charInt] = 1;
+            }
+            else{
+                alphabet[charInt] = alphabet[charInt] + 1;
+            }
         }
     }
     
